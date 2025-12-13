@@ -119,7 +119,7 @@ You can also make new directories:
 private_dir.mkdir(exist_ok=True)
 ```
 
-## Subprocess
+### Subprocess
 ```python
 import subprocess
 ```
@@ -134,4 +134,71 @@ subprocess.run([
   src,
   f"{dst}"
 ])
+```
+
+### Shutil
+```python
+import shutil
+
+shutil.copy("src.txt", "dst.txt")
+shutil.rmtree(private_dir)
+```
+
+## Additional Python Modules & Patterns
+
+These modules and patterns complement my list.
+
+---
+
+### Logging
+Use structured logging instead of `print()` for real-world scripts.
+
+```python
+import logging
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
+
+log.info("Starting job")
+log.warning("Something looks off")
+log.error("Something failed")
+```
+
+### OS & System
+```python
+import os
+import sys
+
+# Environment variables
+api_key = os.getenv("API_KEY")
+
+# Current working directory
+cwd = os.getcwd()
+
+# Exit process
+sys.exit(1)
+
+# Raw CLI args
+args = sys.argv
+```
+
+### JSON
+```python
+import json
+
+with open("config.json") as f:
+    cfg = json.load(f)
+
+with open("out.json", "w") as f:
+    json.dump(cfg, f, indent=2)
+
+```
+
+### Subprocess & Shlex
+```python
+import subprocess
+import shlex
+
+cmd = "gcloud storage cp --recursive src dst"
+subprocess.run(shlex.split(cmd))
 ```
