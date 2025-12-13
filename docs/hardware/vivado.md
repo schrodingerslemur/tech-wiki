@@ -11,7 +11,13 @@ vivado
 ```
 
 ### TCL mode
-RUn
+Run
 ```bash
 vivado -mode tcl
+```
+
+### Batch TCL Script
+Run
+```bash
+vivado -mode batch -source <tcl_script>
 ```
