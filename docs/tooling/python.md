@@ -78,5 +78,60 @@ Now instead of doing `c.x()`, you can simply treat it like a property and do
 c.x
 ```
 
+## Simple function formatting
+Instead of doing 
+```python
+def getnthletter(word, number):
+```
 
-  
+Do
+```python
+def getnthletter(
+  word: str,
+  number: int = 0
+) -> int:
+```
+
+## More systems stuff
+### Getting user 
+```python
+import getpass
+user = getpass.getuser()
+```
+This is helpful for getting home directories. For example
+```python
+home_dir = "C:/{getpass.getuser()}"
+```
+
+### Path
+```python
+from pathlib import Path
+home_dir = Path("C:/user")
+```
+
+You can then concatenate with strings to form other paths: 
+```python
+private_dir = home_dir / "private"
+```
+
+You can also make new directories:
+```python
+private_dir.mkdir(exist_ok=True)
+```
+
+## Subprocess
+```python
+import subprocess
+```
+
+To run the following `gcloud storage cp --recursive src dst`, you can do
+```python
+subprocess.run([
+  "gcloud",
+  "storage",
+  "cp",
+  "--recursive",
+  src,
+  f"{dst}"
+])
+```
