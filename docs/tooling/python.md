@@ -156,12 +156,44 @@ Use structured logging instead of `print()` for real-world scripts.
 ```python
 import logging
 
-logging.basicConfig(level=logging.INFO)
-log = logging.getLogger(__name__)
+# Configure logging
+logging.basicConfig(level=logging.INFO) # only shows if level >= 20
 
-log.info("Starting job")
-log.warning("Something looks off")
-log.error("Something failed")
+# Log messages
+logging.debug("Debug message") # 10 
+logging.info("Info message") # 20
+logging.warning("Warning message") # 30
+logging.error("Error message") # 40
+logging.critical("Critical message") # 50
+
+```
+
+Use handlers
+```python
+import logging
+
+log = logging.getLogger("my_app")
+log.setLevel(logging.INFO)
+
+# Console output
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+
+# File output
+file_handler = logging.FileHandler("app.log")
+file_handler.setLevel(logging.WARNING)
+
+# Format
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+console_handler.setFormatter(formatter)
+file_handler.setFormatter(formatter)
+
+log.addHandler(console_handler)
+log.addHandler(file_handler)
+
+log.info("This goes to console")
+log.warning("This goes to console and file")
+
 ```
 
 ### OS & System
