@@ -6,15 +6,15 @@ README_FILE = "README.md"
 
 def get_title(file_path):
     """Get the first markdown heading as the title; fallback to filename"""
-    try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if line.startswith("# "):
-                    return line[2:].strip()
-    except Exception:
-        pass
-    # fallback
+    # try:
+    #     with open(file_path, "r", encoding="utf-8") as f:
+    #         for line in f:
+    #             line = line.strip()
+    #             if line.startswith("# "):
+    #                 return line[2:].strip()
+    # except Exception:
+    #     pass
+    # # fallback
     return os.path.splitext(os.path.basename(file_path))[0]
 
 def walk_docs(base_dir):
