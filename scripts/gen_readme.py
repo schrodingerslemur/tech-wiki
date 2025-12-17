@@ -18,7 +18,6 @@ def get_title(file_path):
     return os.path.splitext(os.path.basename(file_path))[0]
 
 def walk_docs(base_dir):
-    """Walk docs directory and build a nested TOC"""
     toc_lines = []
 
     for root, dirs, files in os.walk(base_dir):
@@ -26,19 +25,33 @@ def walk_docs(base_dir):
         files.sort()
 
         rel_root = os.path.relpath(root, base_dir)
-        indent_level = 0 if rel_root == "." else rel_root.count(os.sep) + 1
-        indent = "  " * indent_level
+
+        if rel_root == ".":
+            indent_level = 0
+        else:
+            indent_level = rel_root.count(os.sep)
+            indent = "  " * indent_level
+            dir_name = os.path.basename(root)
+            toc_lines.append(f"{indent}- **{dir_name}/**")
+
+        indent = "  " * (indent_level + 1)
 
         for f in files:
-            if f.endswith(".md"):
-                if f.lower() == "readme.md":
-                    continue  # skip nested README files
-                full_path = os.path.join(root, f)
-                rel_path = os.path.relpath(full_path)
-                title = get_title(full_path)
-                toc_lines.append(f"{indent}- [{title}]({rel_path.replace(os.sep, '/')})")
+            if not f.endswith(".md"):
+                continue
+            if f.lower() == "readme.md":
+                continue
+
+            full_path = os.path.join(root, f)
+            rel_path = os.path.relpath(full_path)
+            title = get_title(full_path)
+
+            toc_lines.append(
+                f"{indent}- [{title}]({rel_path.replace(os.sep, '/')})"
+            )
 
     return toc_lines
+
 
 def main():
     toc = walk_docs(DOCS_DIR)
