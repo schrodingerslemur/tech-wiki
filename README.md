@@ -2,10 +2,7 @@
 
 This README is auto-generated from `docs/`.
 
-<<<<<<< HEAD
 - **ai-ml/**
-=======
->>>>>>> 930bf9b4452422265fb88db05ad49daa3cccc333
   - [pytorch](docs/ai-ml/pytorch.md)
   - [sklearn](docs/ai-ml/sklearn.md)
 - **data-sci/**
