@@ -1,15 +1,16 @@
-# Simulating 
+# VCS/Vivado workflow for System Verilog
+## Simulating 
 ```bash
 vcs -sverilog <filename> [-o <executable_name>]
 ./simv
 ```
 
-# Debugging
+## Debugging
 ```bash
 vcs -sverilog -gui -R <filename>
 ```
 
-# Synthesizing
+## Synthesizing
 1) Run
 ```bash
 vivado &
