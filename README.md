@@ -2,7 +2,6 @@
 
 This README is auto-generated from `docs/`.
 
-- [index](docs/index.md)
   - [pytorch](docs/ai-ml/pytorch.md)
   - [sklearn](docs/ai-ml/sklearn.md)
   - [matplotlib](docs/data-sci/matplotlib.md)
