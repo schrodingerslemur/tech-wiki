@@ -5,11 +5,15 @@ This README is auto-generated from `docs/`.
 - **ai-ml/**
   - [pytorch](docs/ai-ml/pytorch.md)
   - [sklearn](docs/ai-ml/sklearn.md)
+  - [wandb](docs/ai-ml/wandb.md)
 - **data-sci/**
   - [matplotlib](docs/data-sci/matplotlib.md)
   - [numpy](docs/data-sci/numpy.md)
   - [pandas](docs/data-sci/pandas.md)
   - [seaborn](docs/data-sci/seaborn.md)
+- **dev-ops/**
+  - [docker](docs/dev-ops/docker.md)
+  - [github](docs/dev-ops/github.md)
 - **hardware/**
   - [verilator](docs/hardware/verilator.md)
   - [vivado](docs/hardware/vivado.md)
