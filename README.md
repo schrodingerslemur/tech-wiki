@@ -2,31 +2,45 @@
 
 This README is auto-generated from `docs/`.
 
-- **ai-ml/**
-  - [pytorch](docs/ai-ml/pytorch.md)
-  - [sklearn](docs/ai-ml/sklearn.md)
-  - [wandb](docs/ai-ml/wandb.md)
-- **data-sci/**
-  - [matplotlib](docs/data-sci/matplotlib.md)
-  - [numpy](docs/data-sci/numpy.md)
-  - [pandas](docs/data-sci/pandas.md)
-  - [seaborn](docs/data-sci/seaborn.md)
-- **dev-ops/**
-  - [docker](docs/dev-ops/docker.md)
-  - [github](docs/dev-ops/github.md)
+- **data/**
+  - **concepts/**
+    - [visualization](docs/data/concepts/visualization.md)
+  - **libraries/**
+    - [matplotlib](docs/data/libraries/matplotlib.md)
+    - [numpy](docs/data/libraries/numpy.md)
+    - [pandas](docs/data/libraries/pandas.md)
+    - [seaborn](docs/data/libraries/seaborn.md)
+- **devops/**
+  - [docker](docs/devops/docker.md)
+  - [github](docs/devops/github.md)
 - **hardware/**
-  - [verilator](docs/hardware/verilator.md)
-  - [vivado](docs/hardware/vivado.md)
-  - [workflow](docs/hardware/workflow.md)
-- **tooling/**
-  - [git](docs/tooling/git.md)
-  - [jupyter](docs/tooling/jupyter.md)
-  - [python](docs/tooling/python.md)
-  - [uv](docs/tooling/uv.md)
-- **web-dev/**
-  - [express](docs/web-dev/express.md)
-  - [flask](docs/web-dev/flask.md)
-  - [mern](docs/web-dev/mern.md)
-  - [mongo](docs/web-dev/mongo.md)
-  - [react](docs/web-dev/react.md)
-  - [tailwind](docs/web-dev/tailwind.md)
+  - **digital-design/**
+    - [rtl](docs/hardware/digital-design/rtl.md)
+  - **fpga/**
+    - [verilator](docs/hardware/fpga/verilator.md)
+    - [vivado](docs/hardware/fpga/vivado.md)
+    - [workflow](docs/hardware/fpga/workflow.md)
+- **languages/**
+  - **python/**
+    - [jupyter](docs/languages/python/jupyter.md)
+    - [python](docs/languages/python/python.md)
+    - [regex](docs/languages/python/regex.md)
+- **ml/**
+  - **concepts/**
+  - **frameworks/**
+    - [pytorch](docs/ml/frameworks/pytorch.md)
+    - [sklearn](docs/ml/frameworks/sklearn.md)
+    - [wandb](docs/ml/frameworks/wandb.md)
+- **tools/**
+  - [git](docs/tools/git.md)
+  - [uv](docs/tools/uv.md)
+- **web/**
+  - [tailwind](docs/web/tailwind.md)
+  - **databases/**
+    - [mongo](docs/web/databases/mongo.md)
+  - **frameworks/**
+    - [express](docs/web/frameworks/express.md)
+    - [flask](docs/web/frameworks/flask.md)
+    - [react](docs/web/frameworks/react.md)
+  - **stacks/**
+    - [mern](docs/web/stacks/mern.md)
