@@ -45,7 +45,7 @@ $       # end of string
 ## Groups and Alternation
 ```python
 (abc)       # capture group
-(?:abc)     # non-capturing group
+(?:abc)     # non-capturing group (actually, not necessary)
 
 # examples
 m = re.search(r"(\d+)-(\d+)", "12-34")
