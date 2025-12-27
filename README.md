@@ -21,6 +21,7 @@ This README is auto-generated from `docs/`.
   - [bash](docs/languages/bash.md)
   - [powershell](docs/languages/powershell.md)
   - **python/**
+    - [pytest](docs/languages/python/pytest.md)
     - [python](docs/languages/python/python.md)
     - [regex](docs/languages/python/regex.md)
 - **ml/**
