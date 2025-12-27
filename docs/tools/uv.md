@@ -9,6 +9,18 @@ uv add <module_names>
 ```
 Note: always use `uv add` instead of `uv pip install`
 
+## Cloning repo
+Once you clone the repo, run
+```
+uv install
+```
+And to run apps/tests (check README)
+```
+uv run start
+# or
+uv run test
+```
+
 ## Running jupyter
 ```
 uv run jupyter lab
