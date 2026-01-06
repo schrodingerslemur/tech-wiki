@@ -3,44 +3,48 @@
 This README is auto-generated from `docs/`.
 
 - **data/**
-  - **concepts/**
-    - [visualization](docs/data/concepts/visualization.md)
-  - **libraries/**
-    - [matplotlib](docs/data/libraries/matplotlib.md)
-    - [numpy](docs/data/libraries/numpy.md)
-    - [pandas](docs/data/libraries/pandas.md)
-    - [seaborn](docs/data/libraries/seaborn.md)
+  - [matplotlib](docs/data/matplotlib.md)
+  - [numpy](docs/data/numpy.md)
+  - [pandas](docs/data/pandas.md)
+  - [seaborn](docs/data/seaborn.md)
 - **devops/**
   - [docker](docs/devops/docker.md)
   - [github](docs/devops/github.md)
 - **hardware/**
-  - **digital-design/**
-    - [rtl](docs/hardware/digital-design/rtl.md)
-  - **fpga/**
-    - [verilator](docs/hardware/fpga/verilator.md)
-    - [vivado](docs/hardware/fpga/vivado.md)
-    - [workflow](docs/hardware/fpga/workflow.md)
+  - **concepts/**
+    - [oop](docs/hardware/concepts/oop.md)
+    - [rtl](docs/hardware/concepts/rtl.md)
+    - [sv](docs/hardware/concepts/sv.md)
+    - [uvm](docs/hardware/concepts/uvm.md)
+    - **static/**
+  - **rtl/**
+    - [gtkwave](docs/hardware/rtl/gtkwave.md)
+    - [verilator](docs/hardware/rtl/verilator.md)
+    - [vivado](docs/hardware/rtl/vivado.md)
+    - [workflow](docs/hardware/rtl/workflow.md)
 - **languages/**
+  - [bash](docs/languages/bash.md)
+  - [powershell](docs/languages/powershell.md)
+  - [tcl](docs/languages/tcl.md)
   - **python/**
-    - [jupyter](docs/languages/python/jupyter.md)
     - [python](docs/languages/python/python.md)
     - [regex](docs/languages/python/regex.md)
 - **ml/**
-  - **concepts/**
-  - **frameworks/**
-    - [pytorch](docs/ml/frameworks/pytorch.md)
-    - [sklearn](docs/ml/frameworks/sklearn.md)
-    - [wandb](docs/ml/frameworks/wandb.md)
+  - [pytorch](docs/ml/pytorch.md)
+  - [sklearn](docs/ml/sklearn.md)
+  - [wandb](docs/ml/wandb.md)
 - **tools/**
   - [git](docs/tools/git.md)
+  - [jupyter](docs/tools/jupyter.md)
+  - [makefile](docs/tools/makefile.md)
   - [uv](docs/tools/uv.md)
 - **web/**
-  - [tailwind](docs/web/tailwind.md)
   - **databases/**
     - [mongo](docs/web/databases/mongo.md)
   - **frameworks/**
     - [express](docs/web/frameworks/express.md)
     - [flask](docs/web/frameworks/flask.md)
     - [react](docs/web/frameworks/react.md)
+    - [tailwind](docs/web/frameworks/tailwind.md)
   - **stacks/**
     - [mern](docs/web/stacks/mern.md)
