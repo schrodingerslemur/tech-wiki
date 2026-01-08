@@ -53,4 +53,13 @@ always_ff @(posedge clock, negedge reset)
 ### All-in-One
 Put everything into one `always_ff` block and remember to use `<=` assignment.
 
+### Test-bench
+Producing clock signal:
+```systemverilog
+ initial begin
+    clock = 0;
+    forever #5 clock = ~clock;
+  end
+```
+
  
