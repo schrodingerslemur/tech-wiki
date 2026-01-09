@@ -5,7 +5,7 @@
 - Design-specific components are encapsualted by `uvm_env` which is instantiated by `uvm_test`
 
 ## Basic definitions
-### Structural things
+### Structural things (`uvm_component`)
 Exist for entire simulation
 
 Created by extending from `uvm_component` using the macro `uvm_component_utils`
@@ -33,8 +33,14 @@ Created by extending from `uvm_component` using the macro `uvm_component_utils`
  `uvm_monitor`
 - Observes DUT signals into transactions
 - Sends transactions to scoreboard and coverage
+  
+ `uvm_scoreboard`
+- Checks correctness of DUT behavior
 
-### Non-structural things
+ `uvm_subscriber`
+- Collects functional coverage
+
+### Non-structural things (`uvm_object`)
 Created and destroyed dynamically
 
   `uvm_sequence`
@@ -42,12 +48,6 @@ Created and destroyed dynamically
 
  `uvm_sequence_item`
 - Represents transaction (contains address, data, control bits)
-
- `uvm_scoreboard`
-- Checks correctness of DUT behavior
-
- `uvm_subscriber`
-- Collects functional coverage
 
 ### Canonical hierarchy
 ```md
@@ -64,3 +64,49 @@ uvm_test
 ```
 
 ## UVM factory
+Allows changing object of one type to be subtittued wiht object of derived type without changing testbench structure/code.
+
+### Coding conventions
+#### Registration
+
+Must include:
+- `typedef` wrapper for `uvm_component_registry`
+- Static function to get `type_id`
+- Function to get type name
+
+Example:
+```systemverilog
+class my_component extends uvm_component;
+
+// 1)
+typedef uvm_component_registery #(my_component, "my_component") type_id;
+
+// 2)
+static function type_id get_type();
+  return type_id::get()
+endfunction
+
+// 3)
+function string get_type_name();
+  return "my_component";
+endfunction
+
+...
+endclass: my_component
+```
+
+Later, the macro can be applied
+```systemverilog
+// 1) For a component
+class my_component extends uvm_component;
+
+`uvm_component_utils(my_component)    // component factory registration
+
+// TODO: the other 3
+```
+
+#### Constructor defaults
+TODO: complete
+
+#### Component and object creation
+TODO: complete
