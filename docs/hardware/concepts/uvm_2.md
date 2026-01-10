@@ -2,8 +2,14 @@
 <img width="683" height="454" alt="image" src="https://github.com/user-attachments/assets/74538347-6abc-4ef3-b40a-ff93d60d6539" />
 
 - All structural elements extend from `uvm_component` base class
-- Design-specific components are encapsualted by `uvm_env` which is instantiated by `uvm_test`
+- All transient elements extend from `uvm_sequence_item` base class
+- Design-specific components are encapsulated by `uvm_env` which is instantiated by `uvm_test`
 
+Content:
+1. [Basic definitions](#basic-definitions)
+2. [UVM factory](#uvm-factory)
+3. [UVM phasing](#uvm-phasing)
+   
 ## Basic definitions
 ### Structural things (`uvm_component`)
 Exist for entire simulation
@@ -181,3 +187,4 @@ is the same as:
 m_my_component = uvm_component_registry #(m_my_component, "m_my_component")::create(...);
 ```
 
+## UVM Phasing
