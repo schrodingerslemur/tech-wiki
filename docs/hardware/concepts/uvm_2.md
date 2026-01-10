@@ -188,3 +188,40 @@ m_my_component = uvm_component_registry #(m_my_component, "m_my_component")::cre
 ```
 
 ## UVM Phasing
+UVM phase execution is started by calling `run_test()`
+
+### Build phase
+1) build
+   - Constructs `uvm_components` using UVM factory
+2) connect
+   - Makes TLM connectons between components or assign handles to testbench resources
+3) end_of_elaboration
+   - Make any final adjustments to structure, configuration or connectivity to testbench
+  
+### Run-time phase
+1) start_of_simulation
+   - Before main (time-consuming) part of test bench
+   - Used for displaying metadata stuff (config info, banners, testbench topology, etc.)
+2) run
+   - Used for stimulus generation and checking testbench activities
+   - Implemented as task: all `run_phase` tasks are executed in parallel
+   - Uses transactors such as drivers and monitors
+     
+   **Parallel run-time phases**
+     - pre_reset, rest, post_reset
+     - pre_configure, configure, post_configure
+     - pre_main, main, post_main
+     - pre_shutdown, shutdown, post_shutdown
+     
+### Clean-up phase
+1) extract
+   - Retrieve and process information from scoreboards and functional coverage monitors
+2) check
+   - Check DUT behaved correctly; identify any errors
+3) report
+   - Display results of simulation
+4) final
+   - Complete outstanding actions
+  
+
+
