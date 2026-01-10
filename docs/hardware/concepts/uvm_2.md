@@ -150,6 +150,7 @@ endfunction
 - Created using the `create` method of the `uvm_component_registery`
 - Components are created in `build_phase` of `uvm_env`
 - Objects are created in `run_phase` of `uvm_env`
+- Components/objects are created hierarchically (`env` then `my_component`...)
 
 ```systemverilog
 class env extends uvm_env;
@@ -222,6 +223,20 @@ UVM phase execution is started by calling `run_test()`
    - Display results of simulation
 4) final
    - Complete outstanding actions
-  
+
+## UVM agent
+<img width="544" height="286" alt="image" src="https://github.com/user-attachments/assets/06782fa3-314e-4428-b214-63c744e7b38a" />
+
+### UVM driver
+- Input: `sequence_item` from `uvm_seqeuencer`
+- Output: signals to `DUT`
+
+### UVM monitor
+- Input: signals from `DUT`
+- Output: transaction
+
+#### Construction
+
+
 
 
