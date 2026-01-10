@@ -43,6 +43,8 @@ Created by extending from `uvm_component` using the macro `uvm_component_utils`
 ### Non-structural things (`uvm_object`)
 Created and destroyed dynamically
 
+Created by extending from `uvm_sequence_item`
+
   `uvm_sequence`
 - Creates and sends sequences items to the sequencer
 
@@ -67,14 +69,17 @@ uvm_test
 Allows changing object of one type to be subtittued wiht object of derived type without changing testbench structure/code.
 
 ### Coding conventions
+***NOTE:** `my_component` refers to something like `my_driver`, etc.
+
 #### Registration
+Telling the UVM factory that a class (`my_component`) exists
 
 Must include:
 - `typedef` wrapper for `uvm_component_registry`
 - Static function to get `type_id`
 - Function to get type name
 
-Example:
+Mechanism:
 ```systemverilog
 class my_component extends uvm_component;
 
@@ -95,18 +100,48 @@ endfunction
 endclass: my_component
 ```
 
-Later, the macro can be applied
+The entire code block above, can be replaced with:
 ```systemverilog
 // 1) For a component
 class my_component extends uvm_component;
+`uvm_component_utils(my_component)
 
-`uvm_component_utils(my_component)    // component factory registration
+// 2) For a parameterized component
+class my_param_component #(int PARAM1=val1, int PARAM2=val2) extends uvm_coomponent;
+typedef my_param_component #(PARAM1, PARAM2) this_t;
+`uvm_component_param_utils(my_component)
 
-// TODO: the other 3
+// 3) For an object
+class my_item extends uvm_sequence_item;
+`uvm_object_utils(my_item)
+
+// 4) For a paramaterized object
+class my_item #(int PARAM1=val1, int PARAM2=val2) extends uvm_sequence_item;
+typedef my_item #(PARAM1, PARAM2) this_t
+`uvm_object_param_utils(this_t)
 ```
 
 #### Constructor defaults
-TODO: complete
+Constructors have to have default arguments so that factory can create objects/components before it knows final name/parent, and then fixe it later.
+```systemverilog
+// For a component
+class my_component extends uvm_component;
 
-#### Component and object creation
-TODO: complete
+function new(string name = "my_component", uvm_component parent = null);
+  super.new(name, parent);
+endfunction
+
+// For an object
+class my_item extends uvm_sequence_item;
+
+function new(string name = "my_item");
+  super.new(name);
+endfunction
+```
+
+
+#### Component and Object creation
+Creaed using the `build_phase` of the `create` method of the `uvm_component_registery`
+
+```systemverilog
+```
