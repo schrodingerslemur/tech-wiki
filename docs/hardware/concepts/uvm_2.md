@@ -141,7 +141,43 @@ endfunction
 
 
 #### Component and Object creation
-Creaed using the `build_phase` of the `create` method of the `uvm_component_registery`
+- Created using the `create` method of the `uvm_component_registery`
+- Components are created in `build_phase` of `uvm_env`
+- Objects are created in `run_phase` of `uvm_env`
 
 ```systemverilog
+class env extends uvm_env;
+
+// Component example
+my_component m_my_component;
+my_param_component #(.ADDR_WIDTH(32), .DATA_WIDTH(32)) m_my_p_component;
+ 
+// Constructor method & registration macro left out
+ 
+// Component and parameterized component create examples
+function void build_phase( uvm_phase phase );
+ m_my_component = my_component::type_id::create("m_my_component", this);
+ m_my_p_component = my_param_component #(32, 32)::type_id::create("m_my_p_component", this);
+endfunction: build
+ 
+task run_phase( uvm_phase phase );
+ // Object example
+ my_seq test_seq;
+ my_param_seq #(.ADDR_WIDTH(32), .DATA_WIDTH(32)) p_test_seq;
+ 
+ // Object and parameterised object create examples
+ test_seq = my_seq::type_id::create("test_seq");
+ p_test_seq = my_param_seq #(32,32)::type_id::create("p_test_seq");
+ // ...
+endtask: run
 ```
+
+**NOTE:** 
+```
+ m_my_component = my_component::type_id::create("m_my_component", this);
+```
+is the same as:
+```
+m_my_component = uvm_component_registry #(m_my_component, "m_my_component")::create(...);
+```
+
