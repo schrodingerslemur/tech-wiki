@@ -233,10 +233,65 @@ UVM phase execution is started by calling `run_test()`
 
 ### UVM monitor
 - Input: signals from `DUT`
-- Output: transaction
+- Output: transaction to `uvm_analysis_port`
 
 #### Construction
+1) Proxy class which extends from `uvm_monitor`
+   - Should containt 1 analysis port and a virtual infterface handle
+```systemverilog
+class bus_monitor extends uvm_monitor;
+  `uvm_component_utils(bus_monitor)
 
+  uvm_analysis_port #(bus_transaction) analysis_port;
+  virtual bus_monitor_bfm vif;   // virtual interface handle
+  bus_config cfg;
 
+  function new(string name, uvm_component parent);
+    super.new(name, parent);
+  endfunction
+
+  function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+
+    analysis_port = new("analysis_port", this);
+
+    cfg = bus_config::get_config(this);
+    vif = cfg.monitor_bfm;     // connect interface
+    vif.proxy = this;          // give interface access to monitor
+  endfunction
+
+  task run_phase(uvm_phase phase);
+    vif.run();                 // start monitoring
+  endtask
+
+  function void notify_transaction(bus_transaction tr);
+    analysis_port.write(tr);   // broadcast transaction
+  endfunction
+endclass
+```
+
+2) Create a BFM interface
+```systemverilog
+interface bus_monitor_bfm (bus_if bus);
+
+  bus_monitor proxy;   // back-pointer to monitor
+
+  task run();
+    bus_transaction tr;
+
+    forever @(posedge bus.clk) begin
+      if (bus.valid) begin
+        tr = bus_transaction::type_id::create("tr");
+        tr.addr = bus.addr;
+        tr.data = bus.data;
+        tr.kind = bus.write ? WRITE : READ;
+
+        proxy.notify_transaction(tr);
+      end
+    end
+  endtask
+
+endinterface
+```
 
 
