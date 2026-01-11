@@ -236,31 +236,40 @@ UVM phase execution is started by calling `run_test()`
 - Output: transaction to `uvm_analysis_port`
 
 #### Construction
+- Proxy class: Connects analysis component to BFM using bus_config
+  
 1) Proxy class which extends from `uvm_monitor`
-   - Should containt 1 analysis port and a virtual infterface handle
+   - Should contain 1 analysis port and a virtual interface handle
+     
 ```systemverilog
 class bus_monitor extends uvm_monitor;
   `uvm_component_utils(bus_monitor)
 
+  // Instantiate analysis port, virtual interface handle and bus config
   uvm_analysis_port #(bus_transaction) analysis_port;
   virtual bus_monitor_bfm vif;   // virtual interface handle
   bus_config cfg;
 
+  // Constructor
   function new(string name, uvm_component parent);
     super.new(name, parent);
   endfunction
 
+  // Build phase: Create analysis port, bus config and virtual interface
+  
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
 
     analysis_port = new("analysis_port", this);
 
+    // Bus config connects virtual interface to monitor
     cfg = bus_config::get_config(this);
     vif = cfg.monitor_bfm;     // connect interface
     vif.proxy = this;          // give interface access to monitor
   endfunction
 
   task run_phase(uvm_phase phase);
+    // Calls the function below
     vif.run();                 // start monitoring
   endtask
 
@@ -270,13 +279,17 @@ class bus_monitor extends uvm_monitor;
 endclass
 ```
 
-2) Create a BFM interface
+2) Create a Bus Functional Model (BFM) interface
+   - BFM abstracts communication protocl for specific bus/interface
+   - Allows you to just manipulate signals without caring about protocl
+   
 ```systemverilog
 interface bus_monitor_bfm (bus_if bus);
 
   bus_monitor proxy;   // back-pointer to monitor
 
   task run();
+    // Create bus_transaction
     bus_transaction tr;
 
     forever @(posedge bus.clk) begin
@@ -286,6 +299,7 @@ interface bus_monitor_bfm (bus_if bus);
         tr.data = bus.data;
         tr.kind = bus.write ? WRITE : READ;
 
+        // Notify proxy of transaction
         proxy.notify_transaction(tr);
       end
     end
