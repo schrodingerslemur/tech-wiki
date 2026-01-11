@@ -226,6 +226,7 @@ UVM phase execution is started by calling `run_test()`
 
 ## UVM agent
 <img width="544" height="286" alt="image" src="https://github.com/user-attachments/assets/06782fa3-314e-4428-b214-63c744e7b38a" />
+
 Consists of:
 - Monitor and Driver BFM
 - Monitor and Driver Proxies
@@ -313,6 +314,87 @@ endinterface
 ```
 
 ### UVM Agent Phases
+#### Agent package
+Create a package for all the imports required for creating an agent. In this example, for an `apb` interface
+
+```systemverilog
+package apb_agent_pkg;
+ 
+import uvm_pkg::*;
+`include "uvm_macros.svh"
+`include "config_macro.svh"
+ 
+`include "apb_seq_item.svh"
+`include "apb_agent_config.svh"
+`include "apb_driver.svh"
+`include "apb_coverage_monitor.svh"
+`include "apb_monitor.svh"
+typedef uvm_sequencer#(apb_seq_item) apb_sequencer;
+`include "apb_agent.svh"
+ 
+//Reg Adapter for UVM Register Model
+`include "reg2apb_adapter.svh"
+ 
+// Utility Sequences
+`include "apb_seq.svh"
+`include "apb_read_seq.svh"
+`include "apb_write_seq.svh"
+ 
+endpackage: apb_agent_pkg
+```
+
+#### Agent configuration object
+Configuration object for agent defines:
+- Topology of agent's sub-components
+- Handles for BFM virtual interfaces (used by driver/monitor proxies)
+- Agent behavior
+
+```systemverilog
+//
+// Class Description:
+//
+//
+class apb_agent_config extends uvm_object;
+ 
+// UVM Factory Registration Macro
+//
+`uvm_object_utils(apb_agent_config)
+ 
+// BFM Virtual Interfaces
+virtual apb_monitor_bfm mon_bfm;
+virtual apb_driver_bfm  drv_bfm;
+ 
+//------------------------------------------
+// Data Members
+//------------------------------------------
+// Is the agent active or passive
+uvm_active_passive_enum active = UVM_ACTIVE;
+// Include the APB functional coverage collector
+bit has_functional_coverage = 0;
+// Include the APB RAM based scoreboard
+bit has_scoreboard = 0;
+//
+// Address decode for the select lines:
+int no_select_lines = 1;
+int apb_index = 0;
+// Which PSEL is the monitor connected to
+logic[31:0] start_address[15:0];
+logic[31:0] range[15:0];
+ 
+//------------------------------------------
+// Methods
+//------------------------------------------
+ 
+// Standard UVM Methods:
+extern function new(string name = "apb_agent_config");
+ 
+endclass: apb_agent_config
+ 
+function apb_agent_config::new(string name = "apb_agent_config");
+ super.new(name);
+endfunction
+```
+
 #### Agent build phase
 TODO: implement
 
