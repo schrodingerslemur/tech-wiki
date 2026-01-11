@@ -226,7 +226,11 @@ UVM phase execution is started by calling `run_test()`
 
 ## UVM agent
 <img width="544" height="286" alt="image" src="https://github.com/user-attachments/assets/06782fa3-314e-4428-b214-63c744e7b38a" />
-
+Consists of:
+- Monitor and Driver BFM
+- Monitor and Driver Proxies
+- Config object
+  
 ### UVM driver
 - Input: `sequence_item` from `uvm_seqeuencer`
 - Output: signals to `DUT`
@@ -308,4 +312,9 @@ interface bus_monitor_bfm (bus_if bus);
 endinterface
 ```
 
+### UVM Agent Phases
+#### Agent build phase
+TODO: implement
 
+#### Agent connect phase
+TODO: implement
