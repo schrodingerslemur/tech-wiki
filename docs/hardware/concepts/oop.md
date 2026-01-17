@@ -1,6 +1,7 @@
 # OOP in SystemVerilog
 
-## Defining class
+## Basics
+### Defining class
 - Constructor
 - Methods
 - Attributes
@@ -26,7 +27,7 @@ class packet;
 endclass: packet    
 ```
 
-## Class instantiation
+### Class instantiation
 ```systemverilog
 module class_ex;
     initial begin
@@ -39,4 +40,20 @@ module class_ex;
         pkt2.print_packet();
     end
 endmodule: class_ed
+```
+
+## Inheritance
+### Declaration
+```systemverilog
+// Declaring class
+class <class_name> extends <parent_class_name>
+```
+### Super
+Calls parent method
+```systemverilog
+class abc extends xyz;
+    function new();
+        super.new();
+    endfunction
+endclass
 ```
