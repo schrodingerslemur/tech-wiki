@@ -186,5 +186,57 @@ ok = cframe.randomize() with { length dist { [1:7], [8:15]:=2 }; }; // [1:7] def
 ```
 
 ### Conditional constraints
+Controlled by mode. Should ne ordered randomization
+```
+typedef enum {ANY, MIN, SML, MED, LGE, MAX} length_mode_t;
 
+class modeframe;
+  rand local bit[3:0] length;
+  rand       bit[7:0] payload[];
+  rand       length_mode_t mode;
 
+  constraint frame_length { payload.size() == length; }
+
+  constraint lengthmode
+    {mode == MIN -> length == 1;
+     mode == SML -> length inside {[2:5]};
+     mode == MED -> length inside {[6:10]};
+     mode == LGE -> length inside {[11:14]};
+     mode == MAX -> length == 15;
+     // Important line
+     solve mode before length;
+}
+  ...
+```
+
+### Randomization failure
+Will spew warning
+```
+class frame;
+  ...
+  constraint min_length { length > 0 } // declarative constraint
+endclass
+
+initial begin
+  ok = cframe.randomize() with { length == 0 };  // procedural constraint (should fail because it conflicts with initial constraint)
+  ...
+```
+
+## Compilation conventions
+- Each class declared in separate file
+- Related files included into packages
+  
+frame.sv:
+```
+typedef enum ...
+
+class frame;
+  ...
+```
+
+frame_pkg.sv
+```
+package frame_pkg;
+  `include "frame.sv"
+endpackage
+```
