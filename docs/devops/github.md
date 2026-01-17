@@ -21,6 +21,11 @@ git rm <file>
 git rm --cached <file>
 ```
 
+#### Changing commit messages
+```bash
+git rebase -i HEAD~4  // Edit (4) based on how many commits ago
+```
+
 ## Github Actions
 1. Create a directory `.github` in root.
 2. 
