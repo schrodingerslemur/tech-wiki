@@ -125,7 +125,7 @@ endclass
 
 // Instantiating / randomizing
 randframe rframe;
-int ok;
+int ok;ue
 
 initial begin
   rframe = new("rframe");
@@ -225,6 +225,7 @@ initial begin
 ## Compilation conventions
 - Each class declared in separate file
 - Related files included into packages
+- Packages imported into test modules
   
 frame.sv:
 ```
@@ -234,9 +235,18 @@ class frame;
   ...
 ```
 
-frame_pkg.sv
+frame_pkg.sv:
 ```
 package frame_pkg;
   `include "frame.sv"
 endpackage
+```
+
+frametest.sv:
+```
+module frametest;
+  import frame_pkg::*;
+
+  frame frm;
+  ...
 ```
