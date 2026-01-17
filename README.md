@@ -15,9 +15,9 @@ This README is auto-generated from `docs/`.
     - [oop](docs/hardware/concepts/oop.md)
     - [rtl](docs/hardware/concepts/rtl.md)
     - [sv](docs/hardware/concepts/sv.md)
+    - [sv_for_uvm](docs/hardware/concepts/sv_for_uvm.md)
     - [uvm](docs/hardware/concepts/uvm.md)
     - [uvm_2](docs/hardware/concepts/uvm_2.md)
-    - [uvm_3](docs/hardware/concepts/uvm_3.md)
     - **static/**
   - **rtl/**
     - [gtkwave](docs/hardware/rtl/gtkwave.md)
